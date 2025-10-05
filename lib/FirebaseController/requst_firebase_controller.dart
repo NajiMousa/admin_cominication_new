@@ -57,7 +57,7 @@ class RequstFireBaseController with Helpers {
           await FireStoreNotfication().getToken(userInfoTranselator.phone);
       await FireStoreNotfication().sendPushMessage(
           token,
-          "تم قبول طلب انظمامك كمترجم ",
+          "تم قبول طلب انضمامك كمترجم ",
           "حالة الطلب",
       );
 

@@ -19,67 +19,108 @@ class _WithDrowBalanceScreenState extends State<WithDrowBalanceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor("#F5F5F5"),
       appBar: AppBar(
-        title: Text("بيانات الطلب "),
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.15),
+        backgroundColor: HexColor("#257BFB"),
+        toolbarHeight: 60.h,
+        title: Text(
+          "بيانات الطلب ",
+          style: GoogleFonts.ibmPlexSansArabic(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
 
       body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.h),
           children: [
         Row(children: [
-          Text("اسم صاحب الطلب "),
-          Spacer(),
-          Text(widget.requstWithDrowModel.name)
+          Text("اسم صاحب الطلب ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+          const Spacer(),
+          Text(widget.requstWithDrowModel.name,style: GoogleFonts.ibmPlexSansArabic(
+              fontWeight: FontWeight.bold, fontSize: 12.sp),)
         ],),
         SizedBox(height: 10.h,),
         Row(children: [
-          Text("الايميل "),
-          Spacer(),
-          Text(widget.requstWithDrowModel.email)
+          Text("الايميل ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+          const Spacer(),
+          Text(widget.requstWithDrowModel.email,style: GoogleFonts.ibmPlexSansArabic(
+              fontWeight: FontWeight.bold, fontSize: 12.sp),)
         ],),
         SizedBox(height: 10.h,),
         Row(children: [
-          Text("رقم الهاتف "),
-          Spacer(),
-          Text(widget.requstWithDrowModel.phone)
+          Text("رقم الهاتف ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+          const Spacer(),
+          Text(widget.requstWithDrowModel.phone,style: GoogleFonts.ibmPlexSansArabic(
+              fontWeight: FontWeight.bold, fontSize: 12.sp),)
         ],),
         SizedBox(height: 10.h,),
         Row(children: [
-          Text("رقم البطاقة او الاقامة "),
-          Spacer(),
-          Text(widget.requstWithDrowModel.IDNumber)
+          Text("رقم البطاقة او الاقامة ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+          const Spacer(),
+          Text(widget.requstWithDrowModel.IDNumber,style: GoogleFonts.ibmPlexSansArabic(
+              fontWeight: FontWeight.bold, fontSize: 12.sp),)
         ],),
         SizedBox(height: 10.h,),
         Row(children: [
-          Text("تاريخ الطلب "),
-          Spacer(),
-          Text(widget.requstWithDrowModel.date.toString())
+          Text("تاريخ الطلب ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+          const Spacer(),
+          Text(widget.requstWithDrowModel.date.toString(),style: GoogleFonts.ibmPlexSansArabic(
+              fontWeight: FontWeight.bold, fontSize: 12.sp),)
         ],),
         SizedBox(height: 10.h,),
         Row(children: [
-          Text("المبلغ المراد سحبه  "),
-          Spacer(),
-          Text(widget.requstWithDrowModel.balance)
+          Text("المبلغ المراد سحبه  ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+          const Spacer(),
+          Text(widget.requstWithDrowModel.balance,style: GoogleFonts.ibmPlexSansArabic(
+              fontWeight: FontWeight.bold, fontSize: 12.sp),)
         ],),
             SizedBox(height: 10.h,),
             Row(children: [
-              Text("ايميل الPayPall  "),
-              Spacer(),
-              Text(widget.requstWithDrowModel.email)
+              Text("ايميل الPayPall  ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
+              const Spacer(),
+              Text(widget.requstWithDrowModel.email,style: GoogleFonts.ibmPlexSansArabic(
+                  fontWeight: FontWeight.bold, fontSize: 12.sp),)
             ],),
         SizedBox(height: 40.h,),
-           loding?Center(child: CircularProgressIndicator(),):
-           ElevatedButton(onPressed: () async{
-             setState(() {
-               loding=true;
-             });
-             _showMyDialogCanselRequst();
-             setState(() {
-               loding=false;
-             });
+           loding?const Center(child: CircularProgressIndicator(),):
+           ElevatedButton(
+             style: ElevatedButton.styleFrom(
+               backgroundColor: Colors.red,
+               minimumSize: Size(double.infinity, 42.h),
+               shape: RoundedRectangleBorder(
+                 borderRadius: BorderRadius.circular(50),
+               ),
+             ),
+             onPressed: () async{
+               setState(() {
+                 loding=true;
+               });
+               _showMyDialogCanselRequst();
+               setState(() {
+                 loding=false;
+               });
 
-            }, child: Text("تم اتمام السحب"))
+             },
+             child: Text(
+               " اتمام السحب",
+               style: GoogleFonts.ibmPlexSansArabic(
+                 fontSize: 16.sp,
+                 color: Colors.white,
+               ),
+             ),
+           )
 
       ]),
     );

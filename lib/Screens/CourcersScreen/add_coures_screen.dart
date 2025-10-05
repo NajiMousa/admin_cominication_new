@@ -4,6 +4,8 @@ import 'package:admin_cominication/Screens/home_screen.dart';
 import 'package:admin_cominication/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -35,11 +37,12 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime(2015),
         lastDate: DateTime(2101));
-    if (picked != null)
+    if (picked != null) {
       setState(() {
         selectedDate = picked;
         DateCourses.text = DateFormat.yMd().format(selectedDate);
       });
+    }
   }
   @override
   void initState() {
@@ -73,7 +76,7 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
     super.dispose();
   }
 
-  ImagePicker _imagePicker = ImagePicker();
+  final ImagePicker _imagePicker = ImagePicker();
   XFile? _pickedFile;
 
   Future<void> _pickImage() async {
@@ -90,11 +93,33 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("اظافة دورة "), centerTitle: true,),
+      backgroundColor: HexColor("#F5F5F5"),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.15),
+        backgroundColor: HexColor("#257BFB"),
+        toolbarHeight: 60.h,
+        title: Text(
+          "اضافة دورة",
+          style: GoogleFonts.ibmPlexSansArabic(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+
       body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           children: [
-            Text("اختر صورة للعرض "),
+            Text("اختر صورة للعرض ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -110,11 +135,11 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
                   ),
                   child: IconButton(onPressed: () {
                     _pickImage();
-                  }, icon: Icon(Icons.camera_alt)),
+                  }, icon: const Icon(Icons.camera_alt)),
                 ),
               ],
             ),
-            Text("اسم الدورة "),
+            Text("اسم الدورة ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -122,9 +147,10 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: nameCourses,
               decoration: InputDecoration(
                   hintText: "اسم الدورة",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
-            Text("نبذه عن  الدورة "),
+            Text("نبذه عن  الدورة ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -132,12 +158,13 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: disCourses,
               decoration: InputDecoration(
                   hintText: "نبذه عن  الدورة",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("محتويات الدورة"),
+            Text("محتويات الدورة",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -145,12 +172,13 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: contanCourses,
               decoration: InputDecoration(
                   hintText: "محتويات الدورة",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("مكان الدورة"),
+            Text("مكان الدورة",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -158,12 +186,13 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: place,
               decoration: InputDecoration(
                   hintText: "مكان الدورة",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("عدد ساعات الدورة"),
+            Text("عدد ساعات الدورة",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -172,12 +201,13 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: "5",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("نوع الدورة"),
+            Text("نوع الدورة",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -185,12 +215,13 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: typeCourses,
               decoration: InputDecoration(
                   hintText: "اون لاين ",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("موعد الدورة  "),
+            Text("موعد الدورة  ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -206,13 +237,14 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
 
                 decoration: InputDecoration(
                     hintText: "1 إلى 3 يوليو 2020",
-                    border: OutlineInputBorder()),
+                    hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                    border: const OutlineInputBorder()),
               ),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("اسم المدرب "),
+            Text("اسم المدرب ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -220,23 +252,24 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: nameTetsherCourses,
               decoration: InputDecoration(
                   hintText: "",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("نبذه عن المدرب "),
+            Text("نبذه عن المدرب ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
             TextFormField(
               controller: disTetsherCourses,
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("رابط الدورة "),
+            Text("رابط الدورة ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp)),
             SizedBox(
               height: 8.h,
             ),
@@ -244,21 +277,38 @@ class _AddCoursesScreenState extends State<AddCoursesScreen> with Helpers {
               controller: urlCoures,
               decoration: InputDecoration(
                   hintText: "www.course.com",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 16.h,
             ),
-            loding?Center(child: CircularProgressIndicator(),):   ElevatedButton(onPressed: () async{
-              setState(() {
-                loding=true;
-              });
-             await performAddCourses();
-
-              setState(() {
-                loding=false;
-              });
-            }, child: Text("اظافة"))
+            loding?const Center(child: CircularProgressIndicator(),):
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: HexColor('#257BFB'),
+                minimumSize:  Size(double.infinity, 42.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+              onPressed: () async {
+                setState(() {
+                  loding = true;
+                });
+                await performAddCourses();
+                setState(() {
+                  loding = false;
+                });
+              },
+              child: Text(
+                "اضافة",
+                style: GoogleFonts.ibmPlexSansArabic(
+                  fontSize: 16.sp,
+                  color: Colors.white,
+                ),
+              ),
+            )
           ]),
     );
   }

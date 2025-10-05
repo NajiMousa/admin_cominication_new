@@ -3,6 +3,7 @@ import 'package:admin_cominication/Model/user_info_transelator.dart';
 import 'package:admin_cominication/Screens/UserScreen/BlokedUserScreen/user_detalis_bloked_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 class UserBlokedViewScreen extends StatefulWidget {
   const UserBlokedViewScreen({Key? key}) : super(key: key);
@@ -28,9 +29,27 @@ class _UserBlokedViewScreenState extends State<UserBlokedViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor("#F5F5F5"),
       appBar: AppBar(
-        title: const Text("قائمة المستخدمين المحظورين "),
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.15),
+        backgroundColor: HexColor("#257BFB"),
+        toolbarHeight: 60.h,
+        title: Text(
+          "قائمة المستخدمين المحظورين ",
+          style: GoogleFonts.ibmPlexSansArabic(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: FutureBuilder<List<UserInfoTranselator>>(
         future: getData(),
@@ -54,8 +73,8 @@ class _UserBlokedViewScreenState extends State<UserBlokedViewScreen> {
                           ),
                         );
                       },
-                      title: Text(listU[index].name),
-                      subtitle: Text(listU[index].address),
+                      title: Text(listU[index].name,style: GoogleFonts.ibmPlexSansArabic(fontSize: 13.sp),),
+                      subtitle: Text(listU[index].address,style: GoogleFonts.ibmPlexSansArabic(fontSize: 11.sp),),
                       leading: SizedBox(
                         width: 66.w,
                         height: 66.h,
@@ -92,17 +111,18 @@ class _UserBlokedViewScreenState extends State<UserBlokedViewScreen> {
                           },
                         ),
                       ),
-                      trailing: Icon(Icons.arrow_forward_ios,color: HexColor('#004AAD'),size: 30.w,),
+
+                      trailing: Icon(Icons.arrow_forward_ios,color: HexColor('#257BFB'),size: 18.w,),
                     ),
                   );
                 },);
             }
             else{
-              return Center(child: Text("لا يوجد طلبات حتى الان "),);
+              return Center(child: Text("لا يوجد طلبات حتى الان ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 13.sp),),);
             }
           }
           else{
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: CircularProgressIndicator(),);
           }
         },
       ),

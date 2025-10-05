@@ -4,6 +4,8 @@ import 'package:admin_cominication/Screens/home_screen.dart';
 import 'package:admin_cominication/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -34,11 +36,12 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime(2022),
         lastDate: DateTime(2101));
-    if (picked != null)
+    if (picked != null) {
       setState(() {
         selectedDate = picked;
         lastTimeToAdd.text = DateFormat.yMd().format(selectedDate);
       });
+    }
   }
 
   @override
@@ -89,11 +92,32 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("اظافة وظيفة "), centerTitle: true,),
+      backgroundColor: HexColor("#F5F5F5"),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.15),
+        backgroundColor: HexColor("#257BFB"),
+        toolbarHeight: 60.h,
+        title: Text(
+          "اضافة وظيفة",
+          style: GoogleFonts.ibmPlexSansArabic(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           children: [
-            Text("اختر صورة للعرض "),
+            Text("اختر صورة للعرض ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -109,11 +133,11 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
                   ),
                   child: IconButton(onPressed: () {
                     _pickImage();
-                  }, icon: Icon(Icons.camera_alt)),
+                  }, icon: const Icon(Icons.camera_alt)),
                 ),
               ],
             ),
-            Text("المسمى الوظيفي "),
+            Text("المسمى الوظيفي ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -121,9 +145,10 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               controller: nameJob,
               decoration: InputDecoration(
                   hintText: "المسمى الوظيفي",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
-            Text("نبذه عن  المهام الوظيفية"),
+            Text("نبذه عن  المهام الوظيفية",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -132,12 +157,13 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               maxLines: 4,
               decoration: InputDecoration(
                   hintText: "نبذه عن  المهام الوظيفية",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("الشروط والمتطلبات"),
+            Text("الشروط والمتطلبات",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -146,12 +172,13 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               controller: disRequsirdJob,
               decoration: InputDecoration(
                   hintText: "الشروط والمتطلبات",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("عدد سنوات الخبرة"),
+            Text("عدد سنوات الخبرة",style: GoogleFonts.ibmPlexSansArabic(fontSize: 11.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -160,12 +187,13 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: "5",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("نوع الوظيفة"),
+            Text("نوع الوظيفة",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -173,12 +201,13 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               controller: typeJob,
               decoration: InputDecoration(
                   hintText: "عقد سنوي",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("أخر موعد للتقديم"),
+            Text("أخر موعد للتقديم",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -193,13 +222,14 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
                 enabled: false,
                 decoration: InputDecoration(
                     hintText: "1 إلى 3 يوليو 2020",
-                    border: OutlineInputBorder()),
+                    hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                    border: const OutlineInputBorder()),
               ),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("الدرجة العلمية "),
+            Text("الدرجة العلمية ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 2.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -207,12 +237,13 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               controller: degreeLeranJob,
               decoration: InputDecoration(
                   hintText: "البكالوريس",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("المكان "),
+            Text("المكان ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -220,12 +251,13 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               controller: plaseJop,
               decoration: InputDecoration(
                   hintText: "مكة المكرمة",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 8.h,
             ),
-            Text("رابط الوظيفة "),
+            Text("رابط الوظيفة ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 12.sp),),
             SizedBox(
               height: 8.h,
             ),
@@ -233,21 +265,39 @@ class _AddJobScreenState extends State<AddJobScreen> with Helpers {
               controller: urlJop,
               decoration: InputDecoration(
                   hintText: "www.course.com",
-                  border: OutlineInputBorder()),
+                  hintStyle: GoogleFonts.ibmPlexSansArabic(fontSize: 10.sp),
+                  border: const OutlineInputBorder()),
             ),
             SizedBox(
               height: 16.h,
             ),
-            loding?Center(child: CircularProgressIndicator(),):   ElevatedButton(onPressed: () async{
-              setState(() {
-                loding=true;
-              });
-              await performSaveJop();
+            loding?const Center(child: CircularProgressIndicator(),):
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: HexColor('#257BFB'),
+                minimumSize:  Size(double.infinity, 42.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+              onPressed: () async {
+                setState(() {
+                  loding = true;
+                });
+                await performSaveJop();
+                setState(() {
+                  loding = false;
+                });
+              },
+              child: Text(
+                "اضافة",
+                style: GoogleFonts.ibmPlexSansArabic(
+                  fontSize: 16.sp,
+                  color: Colors.white,
+                ),
+              ),
+            )
 
-              setState(() {
-                loding=false;
-              });
-            }, child: Text("اظافة"))
           ]),
     );
   }

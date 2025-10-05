@@ -1,9 +1,9 @@
 import 'package:admin_cominication/FirebaseController/requst_firebase_controller.dart';
 import 'package:admin_cominication/Model/user_info_transelator.dart';
 import 'package:admin_cominication/Screens/UserScreen/TranslatorBlokeScreen/translator_bloked_detalis_screen.dart';
-import 'package:admin_cominication/Screens/UserScreen/TranslatorScreen/translator_detalis_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 class TranslatorBlokedViewScreen extends StatefulWidget {
   const TranslatorBlokedViewScreen({Key? key}) : super(key: key);
@@ -25,10 +25,29 @@ class _TranslatorBlokedViewScreenState extends State<TranslatorBlokedViewScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor("#F5F5F5"),
       appBar: AppBar(
-        title: const Text("قائمة المترجمين المحظورين"),
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.15),
+        backgroundColor: HexColor("#257BFB"),
+        toolbarHeight: 60.h,
+        title: Text(
+          "المترجمين المحظورين",
+          style: GoogleFonts.ibmPlexSansArabic(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
+
       body: FutureBuilder<List<UserInfoTranselator>>(
         future: getData(),
         builder: (context, snapshot) {
@@ -43,7 +62,6 @@ class _TranslatorBlokedViewScreenState extends State<TranslatorBlokedViewScreen>
                     padding:  EdgeInsets.only(bottom: 8.h),
                     child: ListTile(
                       onTap: () async{
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -51,11 +69,11 @@ class _TranslatorBlokedViewScreenState extends State<TranslatorBlokedViewScreen>
                           ),
                         );
                       },
-                      title: Text(listU[index].name),
-                      subtitle: Text(listU[index].address),
+                      title: Text(listU[index].name,style: GoogleFonts.ibmPlexSansArabic(fontSize: 13.sp),),
+                      subtitle: Text(listU[index].address,style: GoogleFonts.ibmPlexSansArabic(fontSize: 11.sp),),
                       leading: SizedBox(
-                        width: 66.w,
-                        height: 66.h,
+                        width: 60.w,
+                        height: 60.h,
                         child: FutureBuilder<String>(
                           future: RequstFireBaseController()
                               .uploadImageToFirebase(
@@ -70,7 +88,7 @@ class _TranslatorBlokedViewScreenState extends State<TranslatorBlokedViewScreen>
                                       snapshot.data.toString(),
                                       fit: BoxFit.cover,
                                       height: 60.h,
-                                      width: 60.w,
+                                      width: 50.w,
                                     ),
                                   ));
                             } else {
@@ -82,24 +100,24 @@ class _TranslatorBlokedViewScreenState extends State<TranslatorBlokedViewScreen>
                                       "images/15.png",
                                       fit: BoxFit.cover,
                                       height: 60.h,
-                                      width: 60.w,
+                                      width: 50.w,
                                     ),
                                   ));
                             }
                           },
                         ),
                       ),
-                      trailing: Icon(Icons.arrow_forward_ios,color: HexColor('#004AAD'),size: 30.w,),
+                      trailing: Icon(Icons.arrow_forward_ios,color: HexColor('#257BFB'),size: 18.w,),
                     ),
                   );
                 },);
             }
             else{
-              return Center(child: Text("لا يوجد طلبات حتى الان "),);
+              return Center(child: Text("لا يوجد طلبات حتى الان ",style: GoogleFonts.ibmPlexSansArabic(fontSize: 13.sp),),);
             }
           }
           else{
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: CircularProgressIndicator(),);
           }
         },
       ),

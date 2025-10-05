@@ -3,7 +3,10 @@ import 'package:admin_cominication/Model/JopModel.dart';
 import 'package:admin_cominication/Screens/JobScreen/job_detalis_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+import '../../FirebaseController/requst_firebase_controller.dart';
 
 class JobListScreen extends StatefulWidget {
   const JobListScreen({Key? key}) : super(key: key);
@@ -22,28 +25,52 @@ class _JobListScreenState extends State<JobListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("قائمة الوظائف "),
-        centerTitle: true,
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.pushNamed(context, "/add_job_screen");
-      },
-      child: Icon(Icons.add),
-      ),
+        backgroundColor: HexColor("#F5F5F5"),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 4,
+          shadowColor: Colors.black.withOpacity(0.15),
+          backgroundColor: HexColor("#257BFB"),
+          toolbarHeight: 60.h,
+          title: Text(
+            "قائمة الوظائف ",
+            style: GoogleFonts.ibmPlexSansArabic(
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.sp,
+              ),
+            ),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          shape: const CircleBorder(),
+          onPressed: () {
+            Navigator.pushNamed(context, "/add_job_screen");
+          },
+          backgroundColor: HexColor('#257BFB'),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
         body: FutureBuilder<List<JobModel>>(
           future: getData(),
           builder: (context, snapshot) {
             if(snapshot.hasData){
               if(listU.isNotEmpty){
                 return ListView.builder(
+                  padding: EdgeInsets.symmetric(vertical: 12.h),
                   itemCount: listU.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding:  EdgeInsets.only(bottom: 8.h),
                       child: ListTile(
                         onTap: () async{
-                          //
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -51,19 +78,55 @@ class _JobListScreenState extends State<JobListScreen> {
                             ),
                           );
                         },
-                        title: Text(listU[index].nameJob),
-                        subtitle: Text(listU[index].plaseJop),
-                        trailing: Icon(Icons.arrow_forward_ios,color: HexColor('#004AAD'),size: 30.w,),
+                        title: Text(listU[index].nameJob,style: GoogleFonts.ibmPlexSansArabic(fontSize: 13.sp),),
+                        subtitle: Text(listU[index].plaseJop,style: GoogleFonts.ibmPlexSansArabic(fontSize: 11.sp),),
+                        trailing: Icon(Icons.arrow_forward_ios,color: HexColor('#257BFB'),size: 18.w,),
+                        leading: SizedBox(
+                          width: 60.w,
+                          height: 60.h,
+                          child: FutureBuilder<String>(
+                            future: RequstFireBaseController()
+                                .uploadImageToFirebase(
+                                name: listU[index].image),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return CircleAvatar(
+                                    radius: 30.r,
+                                    backgroundColor: Colors.transparent,
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        snapshot.data.toString(),
+                                        fit: BoxFit.cover,
+                                        height: 60.h,
+                                        width: 50.w,
+                                      ),
+                                    ));
+                              } else {
+                                return CircleAvatar(
+                                    radius: 30.r,
+                                    backgroundColor: Colors.transparent,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        "images/15.png",
+                                        fit: BoxFit.cover,
+                                        height: 60.h,
+                                        width: 50.w,
+                                      ),
+                                    ));
+                              }
+                            },
+                          ),
+                        ),
                       ),
                     );
                   },);
               }
               else{
-                return Center(child: Text("لا يوجد دورات مظافة لحتى الان"),);
+                return Center(child: Text("لا يوجد دورات مضافة لحتى الان",style: GoogleFonts.ibmPlexSansArabic(fontSize: 13.sp),),);
               }
             }
             else{
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child: CircularProgressIndicator(),);
             }
           },
         ));
